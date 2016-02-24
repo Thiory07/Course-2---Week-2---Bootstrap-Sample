@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Animals database</title>
+
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="js/handlebars-v3.0.3.js"></script>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="AnimalsData.js"></script>
+<script src="assignment.js"></script>
+
+<link href="css/bootstrap.css" rel="stylesheet">
+<link href="assignment.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div class="container">
+
+    	<!-- page tile -->
+      	<div class="page-header">
+        	<h1>Wild animals (and some pets)</h1>
+      	</div>    
+
+      	<!-- A navigation menu that selects different views -->
+      	<ul class="nav nav-tabs">
+         	<li role="" class="active"><a href="#" id="categories-tab" >Categories</a></li>
+            <li role=""><a href="#" id="species-tab" >Species</a></li>
+            <li role=""><a href="#" id="slideshow-tab" >Slideshow</a></li>
+         </ul>
+      	<br/><br/>
+
+
+      	<!-- the content section -->
+      	<div id="content"  class="container-fluid"  role="main">
+      	</div>
+		</div> <!-- / container -->
+
+		<!-- Templates -->
+
+		<!-- the category view -->
+
+		<script id="category-template" type="text/x-handlebars-template">
+		  <div class="row">
+		    {{#each category}}
+		    <div class="col-xs-12 col-md-3"> 
+		        <div class="category-thumbnail"  data-id="{{@index}}">
+		          <div class="well">
+		          <img class="crop-img" src="{{thumbnail}}" alt=""/> 
+		          <div class="caption">
+		              <h4> {{name}} </h4>
+		              <p>{{animals.length}} animals</p>
+		          </div>
+		          </div>
+		         </div>
+		    </div> <!-- / col -->
+
+		    {{/each}}
+
+		  </div> <!-- / row -->
+		</script>
+
+		<!-- species -->
+
+		<script id="spieces-template" type="text/x-handlebars-template">
+		  <div class="row">
+		    <!-- xs-12 : small display shows a single column (taking up 12 grid columns)-->
+		    <!-- md-3 : medium and up displays use 3 grid columns per column -->
+		    {{#each animals}}
+		    <div class="col-xs-12 col-md-3"> 
+		     <div class="spieces-thumbnail"  data-id="{{@index}}">
+		        <img class="crop-img" src="{{image1}}" alt=""/> 
+		          
+		         <div class="caption">
+		            <h3>{{name}}</h3>
+		         </div>
+		      </div>
+		       
+		    </div> <!-- / col -->
+		    {{/each}}
+		  </div> <!-- / row -->
+		</script>
+
+		<!-- the view for a single animal -->
+
+		<script id="animal-template" type="text/x-handlebars-template">
+		  <div class="row">
+		    <div class="col-md-4"> 
+		        <img class="large-img" src="{{image2}}" alt=""/> 
+		    </div>
+		    <div class="col-md-8">
+		        <div class="caption">
+		            <h3>{{name}}</h3>
+		            <p>{{description}}</p>
+		        </div>
+		    </div> <!-- / col -->
+
+		  </div> <!-- / row -->
+		</script>
+
+<!-- the slideshow view of a single category -->
+
+<script id="slideshow-template" type="text/x-handlebars-template">
+ 	<div class="row">
+   		<div class="col-md-6">
+
+     		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+
+		        <ol class="carousel-indicators">
+		          <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+		          <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+		          <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+		        </ol>
+
+  
+		       <!-- Wrapper for slides -->
+		        <div class="carousel-inner" role="listbox">
+
+		          {{#each animals}}
+		            <div class="item {{#if @first}}active{{/if}}">
+		             <img class="carousel-img" src="{{image2}}" alt=""/> 
+		            <div class="carousel-caption">
+		              Image caption
+		            </div>
+		          </div> <!-- / carousel item -->
+		          {{/each}}
+
+		        </div>
+
+		        <!-- Controls -->
+		        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+		          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+		          <span class="sr-only">Previous</span>
+		        </a>
+		        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+		          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		          <span class="sr-only">Next</span>
+		        </a>
+		      </div>
+
+    		</div> <!-- / carousel --> 
+  		</div> <!-- / col -->
+	</div> <!-- / row -->
+</script>
+</body>
+</html>
